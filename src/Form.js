@@ -15,12 +15,14 @@ export default class Form extends React.Component {
       let contracts = snapshot.val();
       console.log(contracts);
       let newState = [];
-      for (let contract in contracts) {
+      for (let con in contracts) {
+        //console.log(contracts[con].name);
         newState.push({
-          id: contract,
-          name: contracts[contract].name,
-          company: contracts[contract].company,
-          details: contracts[contract].details
+          id: con,
+          name: contracts[con].name,
+          company: contracts[con].company,
+          details: contracts[con].details,
+          sigs: contracts[con].sigs
         });
       }
       this.setState({
@@ -28,22 +30,6 @@ export default class Form extends React.Component {
       });
     });
   }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    const conRef = firebase.database().ref("contracts");
-    const contract = {
-      name: this.props.name,
-      company: this.props.company,
-      details: this.props.details
-    };
-    conRef.push(contract);
-    this.setState({
-      name: "",
-      company: "",
-      details: ""
-    });
-  };
 
   removeCon = ID => {
     const conRef = firebase.database().ref(`/contracts/${ID}`);
@@ -60,7 +46,7 @@ export default class Form extends React.Component {
         </header>
         <div className="container">
           <section className="add-item">
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.props.handleSubmit}>
               <input
                 type="text"
                 name="name"
@@ -88,21 +74,37 @@ export default class Form extends React.Component {
           <section className="display-item">
             <div className="wrapper">
               <ul>
+                {console.log(this.state.contracts)}
                 {this.state.contracts.map(con => {
                   return (
-                    <div key={con.id}>
-                      <li>
-                        {con.name}
-                        <br />
-                        {con.company}
-                        <br />
-                        {con.details}
-                        <br />
-                        <button onClick={() => this.removeCon(con.id)}>
-                          Remove Contract
-                        </button>
-                      </li>
-                    </div>
+                    <form key={con.id}>
+                      <li> {con.name} </li>
+                      <li> {con.company} </li>
+                      <li> {con.details} </li>
+                      {/* <li>
+                        {" "}
+                        Signatures:
+                        {con.sigs.map(sig => {
+                          <li> sig </li>;
+                        })}
+                      </li> */}
+                      <form onSubmit={this.props.handleSubmit}>
+                        <input
+                          type="text"
+                          name="sigs"
+                          placeholder="Sign Here"
+                          onChange={this.props.addSign}
+                          // value={this.props.sigs}
+                          value={con.sigs.map(sig => {
+                            sig;
+                          })}
+                        />
+                      </form>
+                      <button>Add Signature</button>
+                      <button onClick={() => this.removeCon(con.id)}>
+                        Remove Contract
+                      </button>
+                    </form>
                   );
                 })}
               </ul>
