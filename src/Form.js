@@ -9,6 +9,26 @@ export default class Form extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const conRef = firebase.database().ref("contracts");
+    conRef.on("value", snapshot => {
+      let contracts = snapshot.val();
+      console.log(contracts);
+      let newState = [];
+      for (let contract in contracts) {
+        newState.push({
+          id: contract,
+          name: contracts[contract].name,
+          company: contracts[contract].company,
+          details: contracts[contract].details
+        });
+      }
+      this.setState({
+        contracts: newState
+      });
+    });
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     const conRef = firebase.database().ref("contracts");
@@ -25,12 +45,17 @@ export default class Form extends React.Component {
     });
   };
 
+  removeCon = ID => {
+    const conRef = firebase.database().ref(`/contracts/${ID}`);
+    conRef.remove();
+  };
+
   render() {
     return (
       <div className="app">
         <header>
           <div className="wrapper">
-            <h1>Fun Food Friends</h1>
+            <h1>ADD CONTRACTS HERE</h1>
           </div>
         </header>
         <div className="container">
@@ -62,7 +87,25 @@ export default class Form extends React.Component {
           </section>
           <section className="display-item">
             <div className="wrapper">
-              <ul />
+              <ul>
+                {this.state.contracts.map(con => {
+                  return (
+                    <div key={con.id}>
+                      <li>
+                        {con.name}
+                        <br />
+                        {con.company}
+                        <br />
+                        {con.details}
+                        <br />
+                        <button onClick={() => this.removeCon(con.id)}>
+                          Remove Contract
+                        </button>
+                      </li>
+                    </div>
+                  );
+                })}
+              </ul>
             </div>
           </section>
         </div>
