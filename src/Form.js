@@ -16,7 +16,6 @@ export default class Form extends React.Component {
       console.log(contracts);
       let newState = [];
       for (let con in contracts) {
-        //console.log(contracts[con].name);
         newState.push({
           id: con,
           name: contracts[con].name,
@@ -81,23 +80,16 @@ export default class Form extends React.Component {
                       <li> {con.name} </li>
                       <li> {con.company} </li>
                       <li> {con.details} </li>
-                      {/* <li>
-                        {" "}
-                        Signatures:
-                        {con.sigs.map(sig => {
-                          <li> sig </li>;
-                        })}
-                      </li> */}
                       <form onSubmit={this.props.handleSubmit}>
                         <input
                           type="text"
                           name="sigs"
                           placeholder="Sign Here"
                           onChange={this.props.addSign}
-                          // value={this.props.sigs}
-                          value={con.sigs.map(sig => {
-                            sig;
-                          })}
+                          value={this.props.sigs}
+                          // {/* value={con.sigs.map(sig => {
+                          // <li> {sig} </li>;
+                          // })} */}
                         />
                       </form>
                       <button>Add Signature</button>

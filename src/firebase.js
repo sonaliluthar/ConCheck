@@ -5,7 +5,7 @@ var config = {
   authDomain: "concheck-f917a.firebaseapp.com",
   databaseURL: "https://concheck-f917a.firebaseio.com",
   projectId: "concheck-f917a",
-  storageBucket: "",
+  storageBucket: "concheck-f917a.appspot.com",
   messagingSenderId: "715489126462"
 };
 firebase.initializeApp(config);
