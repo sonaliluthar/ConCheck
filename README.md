@@ -1,3 +1,12 @@
+In this app, along with displaying contracts, I attempted to create a signatures component that had the ability to add signatures to each contract. I wanted to save the signatures that were being added to firebase and then display them underneath. I was not successful in this endeavor. I seemed to have trouble coming up with a way to add elements to an already-created firebase ID. Also, it was difficult to determine the best way to organize the list of signatures, since firebase does not support arrays. I spent a lot of time playing with it before I realized this. 
+
+I did not commit too much time to making my app look pretty. I played with it for about an hour, but realized that I cared more about trying to get the signatures to work. The current CSS on my app comes mostly from a tutorial I found online. I am planning to play some more with HTML/CSS on my free time. 
+
+For React in general, I am starting to better understand how state and props work and how to pass them between components. I don't have a great understanding however of when it would be best to create separate files and what they would individually be used for. My entire app could've been in one App.js (I think), and most of my state is in App.js, so what is the point of creating a Form.js component? Also, I know when we originally had this project, we were told to probably have a Form.js and a Display.js. I don't see how Display.js would fit into this project. 
+
+I also had a lot of trouble in the beginning with pushing to git, especially to a branch that isn't master. I eventually figured it out though and feel somewhat more comfortable with git, but I don't fully understand the purpose/how-to-use merging, pulling, etc. The interface of GitHub itself is also confusing to me.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
