@@ -51,8 +51,8 @@ class App extends Component {
     return (
       <Form
         {...this.state}
-        handleChange={e => this.handleChange(e)}
-        handleSubmit={e => this.handleSubmit(e)}
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
         addSign={e => this.addSign(e)}
       />
     );
